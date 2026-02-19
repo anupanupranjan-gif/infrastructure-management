@@ -1,0 +1,15 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: springboot-servicemonitor
+  namespace: monitoring
+spec:
+  selector:
+    matchLabels:
+      app: advanced-search-app
+  namespaceSelector:
+    matchNames:
+      - commerce-search
+  endpoints:
+    - port: http
+      interval: 15s
