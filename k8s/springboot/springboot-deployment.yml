@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: advanced-search-app
+  namespace: commerce
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: advanced-search-app
+  template:
+    metadata:
+      labels:
+        app: advanced-search-app
+    spec:
+      containers:
+      - name: advanced-search-app
+        image: advanced-search-demo:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: "k8s"
+        - name: ELASTICSEARCH_URL
+          value: "http://elasticsearch.commerce-search:9200"
+        readinessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 30

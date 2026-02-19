@@ -1,0 +1,15 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: elasticsearch-servicemonitor
+  namespace: monitoring
+spec:
+  selector:
+    matchLabels:
+      app: elasticsearch
+  namespaceSelector:
+    matchNames:
+      - commerce-search
+  endpoints:
+    - port: http
+      interval: 15s

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: commerce
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: commerce-search
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: monitoring
