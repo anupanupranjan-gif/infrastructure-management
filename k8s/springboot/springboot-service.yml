@@ -3,11 +3,14 @@ kind: Service
 metadata:
   name: advanced-search-service
   namespace: commerce
+  labels:
+    app: advanced-search-app
 spec:
   selector:
     app: advanced-search-app
   ports:
-    - protocol: TCP
+    - name: http
+      protocol: TCP
       port: 8080
       targetPort: 8080
   type: ClusterIP

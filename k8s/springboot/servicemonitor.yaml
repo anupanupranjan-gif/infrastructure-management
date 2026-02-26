@@ -3,13 +3,16 @@ kind: ServiceMonitor
 metadata:
   name: springboot-servicemonitor
   namespace: monitoring
+  labels:
+    release: monitoring
 spec:
   selector:
     matchLabels:
       app: advanced-search-app
   namespaceSelector:
     matchNames:
-      - commerce-search
+      - commerce
   endpoints:
     - port: http
+      path: /actuator/prometheus
       interval: 15s
